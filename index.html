@@ -270,5 +270,27 @@
         </section>
       </main>
     </div>
+    <script>
+      (() => {
+        const mobileQuery = window.matchMedia("(max-width: 720px)");
+        const threshold = 180;
+
+        function updateHeaderState() {
+          if (!mobileQuery.matches) {
+            document.body.classList.remove("is-compact-header");
+            return;
+          }
+
+          document.body.classList.toggle(
+            "is-compact-header",
+            window.scrollY > threshold,
+          );
+        }
+
+        updateHeaderState();
+        window.addEventListener("scroll", updateHeaderState, { passive: true });
+        mobileQuery.addEventListener("change", updateHeaderState);
+      })();
+    </script>
   </body>
 </html>
